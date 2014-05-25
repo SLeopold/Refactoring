@@ -41,17 +41,14 @@ public class Movie {
     };
     
     public int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
-            return 2;
-        } else {
-            return 1;
-        }
+        return price.getFrequentRenterPoints(daysRented);
     }
 }
  abstract class Price 
  {
     abstract int getPriceCode();
     abstract double getCharge(int daysRented);
+    abstract int getFrequentRenterPoints(int daysRented);
  }
 
  class ChildrensPrice extends Price {
@@ -64,6 +61,11 @@ public class Movie {
             result += (daysRented - 3) * 1.5;
         return result;
     }
+    
+    int getFrequentRenterPoints(int daysRented)
+    {
+        return 1;
+    }
  }
 
  class NewReleasePrice extends Price {
@@ -74,6 +76,14 @@ public class Movie {
     
     double getCharge(int daysRented){
         return daysRented * 3;
+    }
+    
+    int getFrequentRenterPoints(int daysRented)
+    {
+        if (daysRented > 1) {
+            return 2;
+        }
+        return 1;
     }
  }
  
@@ -88,5 +98,10 @@ class RegularPrice extends Price {
         if (daysRented > 2)
         result += (daysRented - 2) * 1.5;
         return result;
+    }
+    
+    int getFrequentRenterPoints(int daysRented)
+    {
+        return 1;
     }
 }
