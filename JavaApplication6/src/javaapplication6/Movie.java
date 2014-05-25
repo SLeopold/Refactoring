@@ -1,5 +1,6 @@
 package javaapplication6;
 
+
 public class Movie {
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
@@ -31,10 +32,25 @@ public class Movie {
                 throw new IllegalArgumentException("Incorrect Price Code");
             }
     }
+    double getCharge(int daysRented) {
+        return price.getCharge(daysRented);
+    }
     
     public String getTitle (){
         return title;
     };
+    
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+}
+ abstract class Price 
+ {
+    abstract int getPriceCode();
 
     double getCharge(int daysRented) {
         double result = 0.0;
@@ -57,19 +73,6 @@ public class Movie {
         }
         return result;
     }
-    
-    public int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
-            return 2;
-        } else {
-            return 1;
-        }
-    }
-}
-
- abstract class Price 
- {
-    abstract int getPriceCode();
  }
 
  class ChildrensPrice extends Price {
