@@ -1,3 +1,8 @@
+package javaapplication6;
+
+
+import javaapplication6.Movie;
+
 class Rental {
     private Movie movie;
     private int daysRented;
